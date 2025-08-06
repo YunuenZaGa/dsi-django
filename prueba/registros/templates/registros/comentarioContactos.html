@@ -1,0 +1,59 @@
+{% extends "inicio/encabezado.html" %}
+
+{% block titulo%} Comentarios {%endblock%}
+
+{%block imagen%}
+    {%load static%}
+    {%static 'inicio/images/coment.png'%}
+{% endblock%}
+{%block descripcion%}
+	Comentarios <span>DSM</span>
+{% endblock%}
+
+{% block contenido%}
+<div class="page-header">
+	<div class="page-title">
+        <h3>Comentarios
+		<small>Lista de comentarios</small></h3>
+    </div>
+</div>
+{% block encabezdo%}
+<div class="breadcrumb-line">
+	<ul class="breadcrumb">
+		<a href="{%url 'Principal'%}">
+			{%if request.path == '/' %}
+				Principal
+			{%else%}
+				Principal{{request.path}}
+			{%endif%}
+		</a>
+	</ul>
+</div>
+{% endblock%}
+
+<table class="table table-bordered table-striped">
+	<thead>
+		<tr>
+			<th>Usuario</th>
+			<th>Mensaje</th>
+			<th></th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for comentario in comentarios %}
+			<tr>
+				<td class="text-semibold">{{comentario.usuario}}</td>
+				<td class="muted">{{comentario.mensaje}}</td>
+				<td class="text-center">
+				<a href="{%url 'ConsultaIndividual' comentario.id%}">Editar</a>	
+				</td>
+				<td class="text-center">
+				<a href="{%url 'Eliminar' comentario.id%}">Eliminar</a>	
+				</td>
+			</tr>
+		{% endfor %}
+	</tbody>
+</table>
+
+{%endblock%}
