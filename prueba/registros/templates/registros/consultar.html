@@ -1,0 +1,54 @@
+{% extends "inicio/encabezado.html" %}
+
+{% block titulo%} comentarios {%endblock%}
+
+
+{% block imagen %}
+	{%load static%}
+	{%static 'inicio/image/comentarios.png'%}
+{%endblock%}
+
+{% block contenido%}
+
+{%block texto%}Comentario{%endblock%}
+
+{%block span%}Comentarios{%endblock%}
+
+<!-- Encabezado -->
+<div class="page-header">
+  <div class="page-title">
+    <h3>Comentarios <small>Lista de Comentarios</small></h3>
+  </div>
+</div>
+<!-- /Encabezado -->
+
+<!-- Tabla de comentarios -->
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>Usuario</th>
+      <th>Mensaje</th>
+      <th>Editar</th>
+      <th>Eliminar</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for comentario in consultar_comentarios %}
+    <tr>
+      <td class="text-semibold">{{ comentario.usuario }}</td>
+      <td class="muted">{{ comentario.mensaje }}</td>
+      <td class="text-center"><a href="{% url 'ConsultaIndividual' comentario.id %}">Editar</a>
+	  </td>
+      <td class="text-center">
+        <a href="{% url 'Eliminar' comentario.id %}">Eliminar</a>
+      </td>
+    </tr>
+    {% empty %}
+    <tr>
+      <td colspan="4" class="text-center">No hay comentarios.</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
